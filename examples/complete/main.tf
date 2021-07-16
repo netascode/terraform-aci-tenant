@@ -1,5 +1,5 @@
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_tenant" {
+  source = "netascode/tenant/aci"
 
   name        = "ABC"
   alias       = "ABC-ALIAS"
