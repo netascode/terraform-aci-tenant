@@ -10,7 +10,7 @@ resource "aci_rest_managed" "fvTenant" {
 
 resource "aci_rest_managed" "aaaDomainRef" {
   for_each   = toset(var.security_domains)
-  dn         = "uni/tn-${var.name}/domain-${each.value}"
+  dn         = "${aci_rest_managed.fvTenant.dn}/domain-${each.value}"
   class_name = "aaaDomainRef"
   content = {
     name = each.value
