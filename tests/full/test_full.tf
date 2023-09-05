@@ -16,9 +16,10 @@ terraform {
 module "main" {
   source = "../.."
 
-  name        = "ABC"
-  alias       = "ALIAS"
-  description = "DESCR"
+  name             = "ABC"
+  alias            = "ALIAS"
+  description      = "DESCR"
+  security_domains = ["SEC1"]
 }
 
 data "aci_rest_managed" "fvTenant" {
@@ -46,5 +47,21 @@ resource "test_assertions" "fvTenant" {
     description = "descr"
     got         = data.aci_rest_managed.fvTenant.content.descr
     want        = "DESCR"
+  }
+}
+
+data "aci_rest_managed" "aaaDomainRef" {
+  dn = "${data.aci_rest_managed.fvTenant.dn}/domain-SEC1"
+
+  depends_on = [module.main]
+}
+
+resource "test_assertions" "aaaDomainRef" {
+  component = "aaaDomainRef"
+
+  equal "name" {
+    description = "name"
+    got         = data.aci_rest_managed.aaaDomainRef.content.name
+    want        = "SEC1"
   }
 }
