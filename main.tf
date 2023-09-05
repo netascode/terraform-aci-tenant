@@ -7,3 +7,12 @@ resource "aci_rest_managed" "fvTenant" {
     descr     = var.description
   }
 }
+
+resource "aci_rest_managed" "aaaDomainRef" {
+  for_each   = toset(var.security_domains)
+  dn         = "${aci_rest_managed.fvTenant.dn}/domain-${each.value}"
+  class_name = "aaaDomainRef"
+  content = {
+    name = each.value
+  }
+}

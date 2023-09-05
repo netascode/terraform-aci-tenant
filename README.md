@@ -41,6 +41,7 @@ module "aci_tenant" {
 | <a name="input_name"></a> [name](#input\_name) | Tenant name. | `string` | n/a | yes |
 | <a name="input_alias"></a> [alias](#input\_alias) | Tenant alias. | `string` | `""` | no |
 | <a name="input_description"></a> [description](#input\_description) | Tenant description. | `string` | `""` | no |
+| <a name="input_security_domains"></a> [security\_domains](#input\_security\_domains) | Security domains associated to tenant | `list(string)` | `[]` | no |
 
 ## Outputs
 
@@ -53,5 +54,6 @@ module "aci_tenant" {
 
 | Name | Type |
 |------|------|
+| [aci_rest_managed.aaaDomainRef](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
 | [aci_rest_managed.fvTenant](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/rest_managed) | resource |
 <!-- END_TF_DOCS -->
